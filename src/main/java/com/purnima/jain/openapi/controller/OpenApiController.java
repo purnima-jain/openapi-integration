@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.purnima.jain.openapi.enums.GenderEnum;
 import com.purnima.jain.openapi.json.request.CustomerPostRequestDto;
 import com.purnima.jain.openapi.json.request.CustomerPutRequestDto;
 import com.purnima.jain.openapi.json.response.CustomerGetResponseDto;
@@ -45,7 +46,7 @@ public class OpenApiController {
 			parameters = {
 					@Parameter(name = "firstName", description = "First Name of the Customer", in = ParameterIn.QUERY, required = false, schema = @Schema(type = "string")),
 					@Parameter(name = "lastName", description = "Last Name of the Customer", in = ParameterIn.QUERY, required = false, schema = @Schema(type = "string")),
-					@Parameter(name = "gender", description = "Gender of the Customer", in = ParameterIn.QUERY, required = false, schema = @Schema(type = "string")),
+					@Parameter(name = "gender", description = "Gender of the Customer", in = ParameterIn.QUERY, required = false, schema = @Schema(implementation = GenderEnum.class)),
 					@Parameter(name = "hobbies", description = "Hobbies of the Customer", in = ParameterIn.QUERY, required = false, array = @ArraySchema(schema = @Schema(type = "string")))
 			},
 			responses = {
@@ -68,7 +69,7 @@ public class OpenApiController {
 		customerJohnDoe.setCustomerId(100);
 		customerJohnDoe.setFirstName("John");
 		customerJohnDoe.setLastName("Doe");
-		customerJohnDoe.setGender("Male");
+		customerJohnDoe.setGender(GenderEnum.MALE);
 		customerJohnDoe.setHobbies(List.of(new HobbyGetResponseDto("Reading"), new HobbyGetResponseDto("Gardening")));
 		customerList.add(customerJohnDoe);
 		
@@ -76,7 +77,7 @@ public class OpenApiController {
 		customerJaneDoe.setCustomerId(101);
 		customerJaneDoe.setFirstName("Jane");
 		customerJaneDoe.setLastName("Doe");
-		customerJaneDoe.setGender("Female");
+		customerJaneDoe.setGender(GenderEnum.FEMALE);
 		customerJaneDoe.setHobbies(List.of(new HobbyGetResponseDto("Movies"), new HobbyGetResponseDto("Running")));
 		customerList.add(customerJaneDoe);
 
@@ -104,7 +105,7 @@ public class OpenApiController {
 		customerJohnDoe.setCustomerId(customerId);
 		customerJohnDoe.setFirstName("John");
 		customerJohnDoe.setLastName("Doe");
-		customerJohnDoe.setGender("Male");
+		customerJohnDoe.setGender(GenderEnum.MALE);
 		customerJohnDoe.setHobbies(List.of(new HobbyGetResponseDto("Reading"), new HobbyGetResponseDto("Gardening")));
 		return ResponseEntity.ok().body(customerJohnDoe);
 	}

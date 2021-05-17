@@ -1,9 +1,11 @@
 package com.purnima.jain.openapi.enums;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum GenderEnum {
 
-	MALE("MALE", "Male"), 
-	FEMALE("FEMALE", "Female");
+	MALE("MAN", "Male"), 
+	FEMALE("WOMAN", "Female");
 
 	private final String key;
 	private final String value;
@@ -13,6 +15,7 @@ public enum GenderEnum {
 		this.value = value;
 	}
 
+	@JsonValue // For having "MAN" & "WOMAN" as Json Input in RequestBody
 	public String getKey() {
 		return this.key;
 	}
@@ -21,7 +24,7 @@ public enum GenderEnum {
 		return this.value;
 	}
 
-	@Override // For Swagger Output as "MALE", "FEMALE"
+	@Override // For possible values in Swagger Schema to appear as "MAN", "WOMAN"
 	public String toString() {
 		return this.key;
 	}
